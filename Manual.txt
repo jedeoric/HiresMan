@@ -1,0 +1,126 @@
+Manual for HIRESMAN - 0.001 - Twilighte 2013
+Oric Atmos V1.1 ROM Sedoric Disk only.
+
+HIRESMAN is a bunch of tools one can use on any hires screen.
+It allows an area to be selected then an operation may be
+applied to that area.
+
+Once booted the Files menu will be displayed. From here you
+may load a hires screen (Text screens are not supported)(2),
+list the current disk directory(3), save the existing one(5),
+view the keys used in the editor(7), Change the Device(8) or
+Drive number (9), quit to main menu (0) or go to the HIRES
+screen (Esc).
+
+HIRESMAN Editor
+Once in the Editor with the HIRES screen displayed you will
+notice a single white inverse byte in the top left corner.
+This is the selection Cursor. Move it aroun d with the cursor
+keys, expand and contract the selected size with ZX and '/
+
+Once you have set the area you want to modify then press the
+key combination to do the operation and it will be done.
+The selected area can be from 1 byte to the full 40x200 screen
+size.
+
+The following operations may be performed (note these are shown
+in the Files option 7 key list)...
+
+>>>> Byte Scroll Left (Func W)
+Scrolls the area to the left in byte (6 pixel) steps but with
+no wraparound.
+
+Note key W stands for West
+
+>>>> Byte Scroll Right (Func E)
+Scrolls the area to the right in byte (6 pixel) steps but with
+no wraparound.
+
+Note key E stands for East
+
+>>>> Byte Scroll Down (Func S)
+Scrolls the area down but with no wraparound.
+
+Note key S stands for South
+
+>>>> Byte Scroll Up (Func N)
+Scrolls the area up but with no wraparound.
+
+Note Key N stands for North.
+
+>>>> Bit Scroll Left (Func L)
+Scrolls the area to the left in single pixel steps but with no
+wraparound.
+If an attribute byte is present it will not be scrolled.
+Inversed bytes will remain inversed.
+
+>>>> Bit Scroll Right (Func R)
+Scrolls the area to the Right in single pixel steps but with no
+wraparound.
+If an attribute byte is present it will not be scrolled.
+Inversed bytes will remain inversed.
+
+>>>> Mirror (Func M)
+A mirror image of the selected area replaces it.
+If an attribute byte is present it will not be mirrored.
+Inversed bytes will remain inversed.
+
+>>>> Flip (Func F)
+A flipped image of the selected area replaces it.
+
+>>>> Dump to Printer (Ctrl D)
+Dumps the selected area to the Printer.
+
+This function is designed to work with Emulators only.
+
+Please follow on-screen instructions. The printer must
+be enabled/switched on before proceeding. Failure to
+do so will cause a fatal crash in the software and a
+reboot will be neccesary.
+
+Once the printer has been switched on the program will
+dump the selected area to the printer.
+It will generate .byt statements followed by a number
+of hex bytes. The number depends on the selected width.
+If the selected width is less than 17 it will take the
+selected width as the number of bytes per row otherwise
+it will default to 16 bytes per row.
+The output will begin with "SelectedArea00"
+
+Example...
+
+SelectedArea00
+ .byt $43,$70,$40
+ .byt $4F,$7C,$40
+ .byt $49,$64,$40
+ .byt $55,$6A,$40
+ .byt $51,$62,$40
+
+>>>> Wipe Area (Ctrl W)
+Wipes the selected area. This is similar to Ctrl X but
+does not affect the copy buffer.
+
+>>>> Cut Area (Ctrl X)
+Copies the selected area into the Copy buffer and wipes
+the selected area on screen.
+
+The copy buffer is the size of the HIRES screen.
+
+>>>> Copy Area (Ctrl C)
+Copies the selected area into the Copy buffer.
+
+>>>> Paste Area (Ctrl V)
+Pastes the copy buffer to the screen.
+The selected area will be ignored. Only the top left
+cursor will be used as the top left origin of the paste.
+
+>>>> Remove Attributes (Func A)
+Replaces all attributes within the selected area with
+an empty bitmap (64).
+
+>>>> Remove Inverse (Func I)
+Removes all inverse from the selected area.
+
+>>>> Invert Area (Func V)
+Inverts the selected area. Invert will ignore attributes
+but for bitmap bytes it will exclusive OR with 63.
